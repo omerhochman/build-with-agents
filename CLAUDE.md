@@ -42,11 +42,15 @@ Each entry: the roadmap item, what's already done, and the ask:
   cheapest ask is approval for a doc/firm-call amendment that unblocks the
   whole decision class, not just this instance.
 
-**Escalation bar (reversibility × blast radius):** decide-and-record anything
-reversible and local (tuning, file structure, libs within the stack) per the
-memory rules. Escalate only what's hard to reverse or shapes the product:
-user-visible interaction, money, privacy posture, dependency lock-in — and
-anything contradicting a firm call (hard stop, always).
+**Escalation bar (reversibility × blast radius):** first try to disambiguate
+from the firm calls and `docs/` — a question the docs already answer is
+never a blocker. Then: decide-and-record anything reversible and local
+(tuning, file structure, libs within the stack, implementing what a spec
+already says) per the memory rules. Escalate what's hard to reverse or
+shapes the product: interaction design the specs don't cover, money, privacy
+posture, dependency lock-in — and anything contradicting a firm call (hard
+stop, always). Genuinely unsure after checking the docs → escalate, with a
+recommendation.
 
 ## Firm calls — do not re-litigate
 
