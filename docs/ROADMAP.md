@@ -1,0 +1,37 @@
+# Roadmap
+
+<!-- template: the agents' task queue — the worker takes the first unchecked,
+     unblocked, unclaimed box, so ordering IS prioritization. Write items as
+     shippable, PR-sized units (a checked box = a merged PR), concrete enough
+     to start without asking questions: name the library, the API, the
+     platform quirk in the item itself. Phases mirror PRODUCT.md § MVP scope.
+     Blocked items get suffixed `⛔ see blocked-by-human.md` by the worker. -->
+
+Effort estimates assume **one developer, focused weeks**.
+
+## v0 — ⟨wedge⟩ (⟨est.⟩)
+
+⟨One line: what this phase proves.⟩
+
+- [ ] ⟨first item — often permissions/inputs plumbing⟩
+- [ ] ⟨core interaction, end to end⟩
+- [ ] ⟨supporting states: errors, empty, edge⟩
+- [ ] ⟨the shareable/viral surface⟩
+- [ ] ⟨deploy: live at a URL / installable⟩
+
+## v1.0 — ⟨next phase⟩ (⟨est.⟩)
+
+- [ ] ⟨…⟩
+
+## v1.1 — ⟨retention layer⟩ (⟨est.⟩)
+
+- [ ] ⟨…⟩
+
+## Sequencing rationale
+
+<!-- template: one paragraph on why the phases are in this order — what the
+     early phase de-risks or seeds for the later one. This is the paragraph
+     that stops agents (and future you) from reordering the plan. -->
+
+⟨Why this order: what v0 proves at near-zero cost, what building later
+phases first would have front-loaded, what v0 seeds that later phases need.⟩
