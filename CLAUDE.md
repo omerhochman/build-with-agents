@@ -38,7 +38,9 @@ Each entry: the roadmap item, what's already done, and the ask:
   `DEPLOY_TOKEN` in the host's project env") — never "configure X". Never ask
   for a secret in chat or a commit; code reads from env from day one.
 - **Decisions:** a brief — options, one-line tradeoffs, and a recommendation.
-  Never an open question that exports the analysis to the human.
+  Never an open question that exports the analysis to the human. Often the
+  cheapest ask is approval for a doc/firm-call amendment that unblocks the
+  whole decision class, not just this instance.
 
 **Escalation bar (reversibility × blast radius):** decide-and-record anything
 reversible and local (tuning, file structure, libs within the stack) per the
