@@ -59,8 +59,16 @@ recommendation.
      reverse or that agents would otherwise reopen every run: scope cuts
      ("X waits for v1.1"), stack choices, privacy posture, monetization
      stance. One bold phrase + one line of why each. 5–10 entries; fold out
-     entries that go stale rather than letting the list grow. -->
+     entries that go stale rather than letting the list grow. The two
+     pre-seeded calls below apply to every project — keep them. -->
 
+- **Research before build.** Before implementing anything non-trivial,
+  survey the current landscape and prefer the most modern, popular, actively
+  maintained tool/library — or the established best practice — over
+  hand-rolling.
+- **Zero cost to the founder.** Anything adopted must be entirely free or
+  have a freemium tier that covers our usage. A tool that would cost money
+  is a blocked-by-human decision, never a default.
 - ⟨**Scope call.** What v0 is and is not, and what waits for later.⟩
 - ⟨**Stack call.** The chosen stack, and the rejected obvious alternative.⟩
 - ⟨**Product-posture call.** e.g. privacy stance, offline stance.⟩
