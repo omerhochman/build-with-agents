@@ -68,36 +68,49 @@ recommendation.
 
 ## Memory rules
 
-This file plus `docs/` is the project memory. It stores **current state, not
-event history** — git is the only event log (`git log -p docs/` for decision
-history). There is no decisions file or ADR directory; do not create one.
+Project memory is five tiers, one per kind of knowledge: truth lives in a
+git-versioned tree co-located with code; constraints stay always-loaded and
+tiny; conventions compile to machinery; history stays verbatim in git.
 
-**Placement rule:** document a decision at the narrowest scope where everyone
-who needs it will already be looking:
+**Tier 0 — enforcement: lint, types, CI, hooks.** A convention's adult form;
+prose is its larval stage. If a repo tool can enforce a constraint
+deterministically, **the tool is the constraint**: add the check, then delete
+the prose that stated it. Never keep a "don't use X" rule where you can
+delete X or lint it away — negative rules keep X in attention.
 
-1. **Line/function-specific** → why-comment at the site. Bar: would a
-   competent dev plausibly "fix" this into a bug? Non-obvious constants,
-   deliberately unidiomatic code, rejected obvious alternatives — yes.
-   Anything readable from the code itself — no comment.
-2. **Module-specific** → doc block at the top of the file: invariants, the
-   approach chosen, and alternatives that **failed and why** ("tried X, broke
-   because Y" — the most valuable sentence you can leave behind).
-3. **System-level** → the relevant `docs/*.md`, **edited in place** to state
-   the new current truth, with a one-clause "why" where non-obvious.
-4. **Never-relitigate** → the firm-calls list above.
+**Tier 1 — this file, always loaded.** Identity, task loop, firm calls,
+these rules, and a **complete pointer index** to everything below — a doc
+not reachable from here effectively doesn't exist. Inclusion bar, all three:
+deleting it would cause mistakes; it isn't derivable from the code (no
+architecture overviews an agent can read from source); the lesson has come
+up **twice** — record rules on the second occurrence, never the first. The
+~100-line budget is a tripwire, not the mechanism; churn here means the
+content belongs in a lower tier.
 
-**Shared reasoning:** if the same rationale covers 2+ sites, first try to
-unify in code (named constant / helper — then it has one site again).
-Otherwise write it once at the lowest common ancestor (module doc block, or
-`docs/`) and leave one-line pointers at each site. **Never paste the same
-explanation twice** — copies diverge silently.
+**Tier 2 — scoped truth: `docs/` and module memory.** Docs are **maps, not
+manuals** — components, interfaces, invariants, and alternatives that
+**failed and why** ("tried X, broke because Y" — the most valuable sentence
+you can leave behind). Edited in place; a doc may only say one thing at a
+time; docs scale with system complexity, never with project age. As code
+lands, detail migrates down to the narrowest scope with all its readers:
+line/function → why-comment at the site (bar: would a competent dev
+plausibly "fix" this into a bug? readable from the code → no comment);
+module → doc block atop the file; system → the relevant `docs/*.md`.
+Shared reasoning: unify in code first (named constant / helper — one site
+again), else write it once at the lowest common ancestor with one-line
+pointers — **never paste the same explanation twice**; copies diverge
+silently.
 
-**Superseded decisions:** edit the doc, don't append. A doc may only say one
-thing at a time.
+**Tier 3 — coordination state.** [docs/ROADMAP.md](docs/ROADMAP.md)
+checkboxes are the queue, an open PR is the claim, the box checked in that
+same PR is the completion record, blocked-by-human.md is the mailbox. All in
+git — no external tracker.
 
-**Size budget:** this file stays under ~100 lines. To add a firm call or rule,
-fold out whatever it makes stale. Docs scale with system complexity, never
-with project age.
+**Tier 4 — history: git and PR threads, verbatim.** The only event log
+(`git log -p docs/` for decision history) — queried, never bulk-loaded, and
+**never summarized into memory files**. There is no decisions file or ADR
+directory; do not create one. Any search index over the repo must be derived
+and rebuildable — truth never moves into it.
 
 ## Docs index
 

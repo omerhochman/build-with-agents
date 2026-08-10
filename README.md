@@ -54,8 +54,12 @@ deletes the latter.
   secret, an account action, or a pivotal decision, the agent files a precise
   ask in `blocked-by-human.md` and moves on to the next task. Runs never end
   early because one task is blocked.
-- **The repo is the only memory.** `CLAUDE.md` + `docs/` store current state,
-  never history (git is the event log). Every PR that makes a doc untrue must
-  fix that doc in the same PR — otherwise later agents inherit lies.
+- **The repo is the only memory — five tiers, one per kind of knowledge.**
+  Enforcement (lint/CI/hooks — conventions compile to machinery and the
+  prose is deleted), a tiny always-loaded root file that indexes everything,
+  scoped docs-as-maps edited in place, coordination state (roadmap boxes,
+  PR claims, the mailbox), and verbatim git history — queried, never
+  summarized into docs. Every PR that makes a doc untrue must fix that doc
+  in the same PR — otherwise later agents inherit lies.
 - **Firm calls end debates.** Decisions the human has signed off on live in
   `CLAUDE.md` and are never re-litigated; contradicting one is a hard stop.

@@ -1,5 +1,10 @@
 # Architecture
 
+A **map, not a manual** (CLAUDE.md § Memory rules, Tier 2): components,
+interfaces, invariants, failed alternatives. Never restate what the code
+says — as code lands, detail migrates down to module doc blocks and this
+doc shrinks toward a map.
+
 <!-- template: current technical truth — stack, components, data model —
      organized by phase so v0 stays visibly minimal. State choices as
      decisions with the one-line why, and name the rejected obvious

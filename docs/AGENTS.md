@@ -66,7 +66,7 @@ it, review each PR in its own sub-agent so verdicts stay independent.
 4. **Firm calls & memory upkeep:** no firm-call violations; roadmap box
    checked in the PR; docs — **including the root README** — edited in place
    wherever the change made them untrue; decisions documented at the right
-   scope (CLAUDE.md § Memory rules).
+   tier (CLAUDE.md § Memory rules).
 5. **Readability, consistency, reusability, scalability, developer
    experience.**
 6. **Observability, non-spammy:** logs/metrics that answer a real question;
@@ -95,6 +95,18 @@ it, review each PR in its own sub-agent so verdicts stay independent.
 
 Never merge a PR that leaves the roadmap, docs, or README untrue — that
 corrupts the project memory every later agent reads. And never a red CI.
+
+**Memory janitor** — part of every run, not a separate pass:
+
+- A PR adding a prose rule to CLAUDE.md must pass its inclusion bar
+  (deletion test, non-derivable, second occurrence) — otherwise push the
+  rule down a tier or drop it.
+- A convention a repo tool could enforce gets **graduated**: add the
+  lint/CI/hook on the PR branch and delete the prose stating it.
+- Every doc a PR adds must be reachable by pointer from CLAUDE.md's index.
+- Periodically (every few weeks of merges) prune: rules the toolchain now
+  enforces, docs restating what the code says, entries that stopped earning
+  their place.
 
 **Bot PRs are in scope:** also pick up PRs from automation accounts
 (`github-actions`, Dependabot and the like) bumping package versions or

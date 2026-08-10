@@ -7,7 +7,11 @@
      platform quirk in the item itself. Phases mirror PRODUCT.md § MVP scope.
      Blocked items get suffixed `⛔ see blocked-by-human.md` by the worker. -->
 
-Effort estimates assume **one developer, focused weeks**.
+Effort estimates assume **one developer, focused weeks**. One checkbox =
+one merged PR. The queue living **in git** is the design; the checkbox
+format is the swappable part — if parallel workers ever multiply, upgrade
+to structured tasks with dependency edges in-repo, not to an external
+tracker.
 
 ## v0 — ⟨wedge⟩ (⟨est.⟩)
 
