@@ -26,7 +26,11 @@ paragraph in the invoking prompt). Do it all **in one PR to `main`** titled
    everything that needs accounts, backends, or policy to a later phase.
 2. **Fill the remaining docs** ([ARCHITECTURE.md](ARCHITECTURE.md),
    [UX.md](UX.md), [PRIVACY.md](PRIVACY.md), [RISKS.md](RISKS.md),
-   [ROADMAP.md](ROADMAP.md)): replace every `⟨placeholder⟩`, delete every
+   [ROADMAP.md](ROADMAP.md)): pick the stack's providers from
+   [PROVIDERS.md](PROVIDERS.md) first (record picks and rejected
+   alternatives in ARCHITECTURE.md; list their secret names in
+   `.env.example` and file the value asks in blocked-by-human.md);
+   replace every `⟨placeholder⟩`, delete every
    `<!-- template: … -->` comment. A doc with nothing true to say for this
    idea gets **deleted, not stubbed** (a UX spec may become an API spec, a
    privacy doc may be one paragraph) — rename or drop docs to fit the idea
@@ -42,7 +46,10 @@ paragraph in the invoking prompt). Do it all **in one PR to `main`** titled
 5. **Housekeeping in the same PR:** stamp `<owner>/<repo>` into the cron
    prompts below **and into the links in
    [blocked-by-human.md](../blocked-by-human.md)**, verify the two
-   pre-seeded entries there still match reality, and
+   pre-seeded entries there still match reality, adapt
+   `.github/workflows/ci.yml` to the chosen stack (replace the prechecks
+   the stack decision resolves; keep its least-privilege/self-skip
+   properties per the file's header), and
    delete this Bootstrap section (memory stores current state — a
    bootstrapped project has no bootstrap protocol).
 6. **End with a report:** PR link, the proposed firm calls, and what the

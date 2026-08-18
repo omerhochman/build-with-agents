@@ -77,7 +77,9 @@ only questions the firm calls and `docs/` don't already answer.
 - **Zero cost to the founder.** Anything adopted must be entirely free or
   have a freemium tier that covers our usage. A tool that would cost money
   is a blocked-by-human decision, never a default — and paid upgrades only
-  become eligible once the product earns revenue that covers them.
+  become eligible once the product earns revenue that covers them. Pick
+  providers from the vetted menu in [docs/PROVIDERS.md](docs/PROVIDERS.md)
+  first; secrets are read from env and manifested in `.env.example`.
 - **World-class UX.** Smoothness of the core journey outranks
   implementation cost — never trade UX away because it's hard to build;
   cut scope instead.
@@ -154,3 +156,5 @@ and rebuildable — truth never moves into it.
 | [docs/UX.md](docs/UX.md) | Core interaction spec |
 | [docs/PRIVACY.md](docs/PRIVACY.md) | Data lifecycle, guarantees |
 | [docs/RISKS.md](docs/RISKS.md) | Monetization stance, key risks |
+| [docs/PROVIDERS.md](docs/PROVIDERS.md) | Vetted free-tier provider menu, gotchas, secret names |
+| [.github/workflows/ci.yml](.github/workflows/ci.yml) | Tier-0 backstop — self-skipping lint/typecheck/test per stack |

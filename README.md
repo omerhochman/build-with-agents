@@ -41,6 +41,9 @@ pivotal decisions.
 | [docs/UX.md](docs/UX.md) | The core interaction spec |
 | [docs/PRIVACY.md](docs/PRIVACY.md) | Data lifecycle and guarantees |
 | [docs/RISKS.md](docs/RISKS.md) | Monetization stance, key risks |
+| [docs/PROVIDERS.md](docs/PROVIDERS.md) | Vetted free-tier provider menu with gotchas and secret names |
+| [.github/workflows/ci.yml](.github/workflows/ci.yml) | CI that's green from the first fork and turns itself on per stack |
+| [.env.example](.env.example) | Manifest of every secret the code reads |
 
 Template docs contain `⟨angle-bracket placeholders⟩` and
 `<!-- template: … -->` guidance comments; bootstrap replaces the former and
@@ -65,7 +68,10 @@ deletes the latter.
   project inherits: research free tools before building (paid upgrades only
   after revenue covers them), world-class UX over implementation cost,
   design for leverage, walking skeleton first, delete before you add,
-  demo-able PRs.
+  demo-able PRs. Plus a vetted free-tier provider menu
+  ([docs/PROVIDERS.md](docs/PROVIDERS.md)) and a least-privilege CI
+  workflow that passes on the empty template and activates per stack as
+  code lands — production-tested defaults, not guesses.
 - **The repo is the only memory — five tiers, one per kind of knowledge.**
   Enforcement (lint/CI/hooks — conventions compile to machinery and the
   prose is deleted), a tiny always-loaded root file that indexes everything,
