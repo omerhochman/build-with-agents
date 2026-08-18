@@ -1,0 +1,113 @@
+# CI — the backstop; local checks are the first line of defence.
+#
+# Design (inherited from a production repo, keep these properties):
+# - Least privilege: explicit narrow `permissions:` — never inherit the
+#   repo default (legacy default is contents: write).
+# - Cheapest signal first: lint fails in seconds, tests after.
+# - Self-skipping: each toolchain job prechecks its manifest file and
+#   no-ops until that stack lands, so CI is green from the first fork
+#   and turns itself on as the stack arrives. Bootstrap replaces the
+#   prechecks it can resolve statically with the real jobs.
+# - Every job has timeout-minutes; every push to a PR cancels the
+#   previous run.
+# - Jobs needing secrets must preflight (`if secret empty → notice +
+#   skip`), never fail an unconfigured fork or a fork PR.
+# - Budgets belong here: when the product has a size/latency budget
+#   (bundle KB, binary MB, p95), add a job that fails on regression —
+#   cheaper than discovering it after a release.
+
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  node:
+    name: JS/TS (lint + typecheck + test)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - id: precheck
+        run: |
+          if [ -f package.json ]; then echo "exists=true" >> "$GITHUB_OUTPUT"
+          else echo "exists=false" >> "$GITHUB_OUTPUT"; echo "::notice::no package.json — JS/TS stack hasn't landed, skipping."; fi
+      - if: steps.precheck.outputs.exists == 'true'
+        uses: oven-sh/setup-bun@v2
+      - if: steps.precheck.outputs.exists == 'true'
+        run: bun install --frozen-lockfile || bun install
+      # Runs each script only if the project defines it — projects opt
+      # in by adding scripts, not by editing this file.
+      - if: steps.precheck.outputs.exists == 'true'
+        run: |
+          for s in check lint typecheck test build; do
+            if jq -e --arg s "$s" '.scripts[$s]' package.json > /dev/null; then
+              echo "--- bun run $s"; bun run "$s"
+            fi
+          done
+
+  python:
+    name: Python (ruff + pytest)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - id: precheck
+        run: |
+          if [ -f pyproject.toml ]; then echo "exists=true" >> "$GITHUB_OUTPUT"
+          else echo "exists=false" >> "$GITHUB_OUTPUT"; echo "::notice::no pyproject.toml — Python stack hasn't landed, skipping."; fi
+      - if: steps.precheck.outputs.exists == 'true'
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - if: steps.precheck.outputs.exists == 'true'
+        run: |
+          uv sync
+          uv run ruff format --check
+          uv run ruff check
+          if [ -d tests ]; then uv run pytest; fi
+
+  go:
+    name: Go (vet + test)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - id: precheck
+        run: |
+          if [ -f go.mod ]; then echo "exists=true" >> "$GITHUB_OUTPUT"
+          else echo "exists=false" >> "$GITHUB_OUTPUT"; echo "::notice::no go.mod — Go stack hasn't landed, skipping."; fi
+      - if: steps.precheck.outputs.exists == 'true'
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - if: steps.precheck.outputs.exists == 'true'
+        run: |
+          gofmt_out=$(gofmt -l .)
+          if [ -n "$gofmt_out" ]; then echo "::error::unformatted: $gofmt_out"; exit 1; fi
+          go vet ./...
+          go test ./... -race -count=1
+
+  shell:
+    name: shellcheck
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          if compgen -G "scripts/*.sh" > /dev/null; then
+            sudo apt-get update -qq && sudo apt-get install -y shellcheck
+            shellcheck scripts/*.sh
+          else
+            echo "::notice::no scripts/*.sh — skipping."
+          fi

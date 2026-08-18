@@ -11,13 +11,26 @@ Turns this template into a real project from the human's idea brief (the
 paragraph in the invoking prompt). Do it all **in one PR to `main`** titled
 `Bootstrap: <project name>`, so the human signs off on the framing by merging:
 
+0. **Interview the human — gaps only.** Bootstrap is an interactive session:
+   before writing anything, ask **one batch** of numbered questions covering
+   only what the idea brief leaves open — typically audience, the wedge,
+   platform/stack constraints, product posture (privacy, offline),
+   monetization stance, and the project name. Give each question a proposed
+   default so a one-word answer (or "all defaults") works. Never ask what
+   the brief or the pre-seeded firm calls already answer. If genuinely
+   running unattended, skip the interview and propose everything decisively
+   — merging the PR is the sign-off either way.
 1. **Write [PRODUCT.md](PRODUCT.md) first** — one-liner, why now, MVP scope.
    Every other doc derives from it. The key move: find the **wedge** — the
    cheapest version that proves the core interaction/value, and push
    everything that needs accounts, backends, or policy to a later phase.
 2. **Fill the remaining docs** ([ARCHITECTURE.md](ARCHITECTURE.md),
    [UX.md](UX.md), [PRIVACY.md](PRIVACY.md), [RISKS.md](RISKS.md),
-   [ROADMAP.md](ROADMAP.md)): replace every `⟨placeholder⟩`, delete every
+   [ROADMAP.md](ROADMAP.md)): pick the stack's providers from
+   [PROVIDERS.md](PROVIDERS.md) first (record picks and rejected
+   alternatives in ARCHITECTURE.md; list their secret names in
+   `.env.example` and file the value asks in blocked-by-human.md);
+   replace every `⟨placeholder⟩`, delete every
    `<!-- template: … -->` comment. A doc with nothing true to say for this
    idea gets **deleted, not stubbed** (a UX spec may become an API spec, a
    privacy doc may be one paragraph) — rename or drop docs to fit the idea
@@ -31,8 +44,12 @@ paragraph in the invoking prompt). Do it all **in one PR to `main`** titled
    now, status, roadmap at a glance, tech stack, principles, docs table. No
    trace of the template may remain.
 5. **Housekeeping in the same PR:** stamp `<owner>/<repo>` into the cron
-   prompts below, verify the two pre-seeded entries in
-   [blocked-by-human.md](../blocked-by-human.md) still match reality, and
+   prompts below **and into the links in
+   [blocked-by-human.md](../blocked-by-human.md)**, verify the two
+   pre-seeded entries there still match reality, adapt
+   `.github/workflows/ci.yml` to the chosen stack (replace the prechecks
+   the stack decision resolves; keep its least-privilege/self-skip
+   properties per the file's header), and
    delete this Bootstrap section (memory stores current state — a
    bootstrapped project has no bootstrap protocol).
 6. **End with a report:** PR link, the proposed firm calls, and what the
@@ -40,7 +57,9 @@ paragraph in the invoking prompt). Do it all **in one PR to `main`** titled
 
 ## Worker (a few times daily)
 
-Follows the task loop in [CLAUDE.md](../CLAUDE.md). No extra rules.
+Follows the task loop in [CLAUDE.md](../CLAUDE.md). No extra rules. Runs
+unattended — never asks questions; anything needing a human goes to
+[blocked-by-human.md](../blocked-by-human.md).
 
 **Cron prompt (fresh session per run) — copy verbatim, fill the repo:**
 
@@ -68,9 +87,14 @@ it, review each PR in its own sub-agent so verdicts stay independent.
    wherever the change made them untrue; decisions documented at the right
    tier (CLAUDE.md § Memory rules).
 5. **Readability, consistency, reusability, scalability, developer
-   experience.**
-6. **Observability, non-spammy:** logs/metrics that answer a real question;
-   no noise.
+   experience.** Each external system (API, DB, service) has exactly one
+   canonical owning module — a second call site to the same system is a
+   finding. Exported functions take minimal required params with sensible
+   defaults; error messages say what to do next.
+6. **Observability, non-spammy:** logs tell a story, not the novel — one
+   structured line per decision point (what was attempted, why it failed,
+   the next action), successes silent, no per-iteration chatter, never a
+   secret or PII in a log line.
 7. **Comments judicious:** one-sentence why-comments only where the code
    can't say it (per the memory rules' bar); never narration.
 
@@ -121,3 +145,12 @@ You are the reviewer-merger for ⟨owner/repo⟩. Read docs/AGENTS.md
 and CLAUDE.md, then process all open PRs per the reviewer protocol.
 End with a report: merged / fixed / blocked / closed.
 ```
+
+## Steering (on-demand, human present)
+
+When the human invokes an agent in-session to steer direction, brainstorm
+the roadmap, or amend firm calls: first read the firm calls and `docs/` —
+then ask about only the genuine gaps, with a recommendation attached to
+each question. Record the outcomes at the right memory tier (CLAUDE.md
+§ Memory rules) in the same session; a steering conversation that changes
+direction but leaves the docs unchanged never happened.
