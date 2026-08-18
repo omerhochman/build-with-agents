@@ -34,9 +34,11 @@ waits.⟩ Framing: [docs/PRODUCT.md](docs/PRODUCT.md).
 It holds **only open blockers** — the resolving agent deletes the entry.
 Each entry: the roadmap item, what's already done, and the ask:
 
-- **Secrets / account actions:** a precise, executable ask ("set
-  `DEPLOY_TOKEN` in the host's project env") — never "configure X". Never ask
-  for a secret in chat or a commit; code reads from env from day one.
+- **Secrets / account actions:** numbered steps the human can execute in
+  under a minute — a clickable link (full URL) for every page to open, and
+  a copy-paste-ready block for every command, form field, or value — never
+  "configure X". Never ask for a secret in chat or a commit; code reads
+  from env from day one.
 - **Decisions:** a brief — options, one-line tradeoffs, and a recommendation.
   Never an open question that exports the analysis to the human. Often the
   cheapest ask is approval for a doc/firm-call amendment that unblocks the
@@ -51,6 +53,12 @@ shapes the product: interaction design the specs don't cover, money, privacy
 posture, dependency lock-in — and anything contradicting a firm call (hard
 stop, always). Genuinely unsure after checking the docs → escalate, with a
 recommendation.
+
+**Questions are for humans-in-session only.** Scheduled runs (worker,
+reviewer-merger) never ask questions mid-run — a blocker goes in the
+mailbox and the run continues. Ask directly only when a human is present
+in the session (bootstrap, steering, roadmap brainstorming), and even then
+only questions the firm calls and `docs/` don't already answer.
 
 ## Firm calls — do not re-litigate
 
@@ -68,7 +76,22 @@ recommendation.
   hand-rolling.
 - **Zero cost to the founder.** Anything adopted must be entirely free or
   have a freemium tier that covers our usage. A tool that would cost money
-  is a blocked-by-human decision, never a default.
+  is a blocked-by-human decision, never a default — and paid upgrades only
+  become eligible once the product earns revenue that covers them.
+- **World-class UX.** Smoothness of the core journey outranks
+  implementation cost — never trade UX away because it's hard to build;
+  cut scope instead.
+- **Design for leverage.** Every merged PR either adds a capability or adds
+  capacity to add capabilities; prefer the version of a change that makes
+  the next change cheaper, and treat the 2nd/3rd instance of anything as a
+  category to abstract.
+- **Walking skeleton first.** Each phase starts with the thinnest
+  end-to-end slice live at a real URL (or installable); everything after
+  iterates on a live thing — never a big-bang integration.
+- **Delete before you add.** When fixing or extending, first look for code
+  or docs to remove or simplify; only then add.
+- **Demo-able PRs.** Every PR changes what a user can see or do, or adds
+  leverage — and its body states how to verify that in under a minute.
 - ⟨**Scope call.** What v0 is and is not, and what waits for later.⟩
 - ⟨**Stack call.** The chosen stack, and the rejected obvious alternative.⟩
 - ⟨**Product-posture call.** e.g. privacy stance, offline stance.⟩

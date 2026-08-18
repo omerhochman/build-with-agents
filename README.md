@@ -19,10 +19,14 @@ pivotal decisions.
    > protocol for this idea: `<one paragraph: what it is, who it's for, why
    > now — everything you know or believe about it>`
 
-3. **Review and merge the bootstrap PR.** Merging is how you sign off on the
+3. **Answer the bootstrap interview.** The agent asks one batch of numbered
+   questions — only about what your paragraph left open, each with a
+   proposed default — then opens the bootstrap PR.
+4. **Review and merge the bootstrap PR.** Merging is how you sign off on the
    framing, the stack, and the firm calls — read them like a contract.
-4. **Resolve the entries in [blocked-by-human.md](blocked-by-human.md)**
-   (branch protection, agent scheduling). From then on the loop runs itself.
+5. **Resolve the entries in [blocked-by-human.md](blocked-by-human.md)**
+   (branch protection, agent scheduling) — each is a sub-minute checklist
+   with links and copy-paste values. From then on the loop runs itself.
 
 ## What's inside
 
@@ -52,8 +56,16 @@ deletes the latter.
   agent runs coexist without stepping on each other.
 - **Humans are an async dependency, not a supervisor.** When a task needs a
   secret, an account action, or a pivotal decision, the agent files a precise
-  ask in `blocked-by-human.md` and moves on to the next task. Runs never end
-  early because one task is blocked.
+  step-by-step ask (links + copy-paste values) in `blocked-by-human.md` and
+  moves on to the next task. Runs never end early because one task is
+  blocked. Scheduled runs never ask questions — agents only interview you
+  in-session (bootstrap, steering, roadmap brainstorming), and only about
+  what the written decisions don't already answer.
+- **Opinionated defaults, pre-seeded.** The template ships firm calls every
+  project inherits: research free tools before building (paid upgrades only
+  after revenue covers them), world-class UX over implementation cost,
+  design for leverage, walking skeleton first, delete before you add,
+  demo-able PRs.
 - **The repo is the only memory — five tiers, one per kind of knowledge.**
   Enforcement (lint/CI/hooks — conventions compile to machinery and the
   prose is deleted), a tiny always-loaded root file that indexes everything,

@@ -11,6 +11,15 @@ Turns this template into a real project from the human's idea brief (the
 paragraph in the invoking prompt). Do it all **in one PR to `main`** titled
 `Bootstrap: <project name>`, so the human signs off on the framing by merging:
 
+0. **Interview the human — gaps only.** Bootstrap is an interactive session:
+   before writing anything, ask **one batch** of numbered questions covering
+   only what the idea brief leaves open — typically audience, the wedge,
+   platform/stack constraints, product posture (privacy, offline),
+   monetization stance, and the project name. Give each question a proposed
+   default so a one-word answer (or "all defaults") works. Never ask what
+   the brief or the pre-seeded firm calls already answer. If genuinely
+   running unattended, skip the interview and propose everything decisively
+   — merging the PR is the sign-off either way.
 1. **Write [PRODUCT.md](PRODUCT.md) first** — one-liner, why now, MVP scope.
    Every other doc derives from it. The key move: find the **wedge** — the
    cheapest version that proves the core interaction/value, and push
@@ -31,8 +40,9 @@ paragraph in the invoking prompt). Do it all **in one PR to `main`** titled
    now, status, roadmap at a glance, tech stack, principles, docs table. No
    trace of the template may remain.
 5. **Housekeeping in the same PR:** stamp `<owner>/<repo>` into the cron
-   prompts below, verify the two pre-seeded entries in
-   [blocked-by-human.md](../blocked-by-human.md) still match reality, and
+   prompts below **and into the links in
+   [blocked-by-human.md](../blocked-by-human.md)**, verify the two
+   pre-seeded entries there still match reality, and
    delete this Bootstrap section (memory stores current state — a
    bootstrapped project has no bootstrap protocol).
 6. **End with a report:** PR link, the proposed firm calls, and what the
@@ -40,7 +50,9 @@ paragraph in the invoking prompt). Do it all **in one PR to `main`** titled
 
 ## Worker (a few times daily)
 
-Follows the task loop in [CLAUDE.md](../CLAUDE.md). No extra rules.
+Follows the task loop in [CLAUDE.md](../CLAUDE.md). No extra rules. Runs
+unattended — never asks questions; anything needing a human goes to
+[blocked-by-human.md](../blocked-by-human.md).
 
 **Cron prompt (fresh session per run) — copy verbatim, fill the repo:**
 
@@ -121,3 +133,12 @@ You are the reviewer-merger for ⟨owner/repo⟩. Read docs/AGENTS.md
 and CLAUDE.md, then process all open PRs per the reviewer protocol.
 End with a report: merged / fixed / blocked / closed.
 ```
+
+## Steering (on-demand, human present)
+
+When the human invokes an agent in-session to steer direction, brainstorm
+the roadmap, or amend firm calls: first read the firm calls and `docs/` —
+then ask about only the genuine gaps, with a recommendation attached to
+each question. Record the outcomes at the right memory tier (CLAUDE.md
+§ Memory rules) in the same session; a steering conversation that changes
+direction but leaves the docs unchanged never happened.
