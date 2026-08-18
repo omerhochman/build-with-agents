@@ -26,3 +26,28 @@ them from env, `.env.example` manifests them, actual values arrive via
 
 Rows are maintained like any doc: a provider that burns us gets its
 gotcha updated (or the row replaced) in the same PR that felt the burn.
+
+## Preferred stack (TypeScript, production-proven)
+
+The default stack for a web/API product, inherited from a sibling
+production repo (nlqdb). Bootstrap starts here; deviating requires the
+usual research-before-build pass and a recorded rejection in
+ARCHITECTURE.md.
+
+| Layer | Pick | Why / gotcha |
+|-------|------|--------------|
+| Runtime + workspace | [Bun](https://bun.sh) monorepo (`apps/*`, `packages/*`) | one lockfile, built-in test runner for unit tests |
+| Language | TypeScript, strict | zod at every external boundary |
+| Lint/format | [Biome](https://biomejs.dev) | one tool replaces eslint+prettier; `check`/`fix` scripts |
+| Git hooks | [lefthook](https://github.com/evilmartians/lefthook) | run Biome pre-commit so CI rarely reds |
+| API framework | [Hono](https://hono.dev) on Cloudflare Workers | 3 MiB free-tier bundle cap — audit heavy deps |
+| DB access | [Kysely](https://kysely.dev) (+ `kysely-d1` on D1, or Neon serverless) | typed SQL, no ORM magic; one owning `packages/db` module |
+| Auth | [Better Auth](https://better-auth.com) | library not service; you own the session table |
+| Web frontend | [Astro](https://astro.build) + React islands | zero-JS static pages by default; islands only where interactive |
+| MCP surface | [`@modelcontextprotocol/sdk`](https://github.com/modelcontextprotocol/typescript-sdk) | serve from the same Worker as the API — one deploy, one origin |
+| Tests | vitest (unit/integration) + Playwright (e2e) | `@cloudflare/vitest-pool-workers` to test Workers for real |
+| Releases | [changesets](https://github.com/changesets/changesets) | only if publishing packages; apps just deploy |
+
+Rejected default: Next.js + Vercel + Neon + separate auth service — a
+platform and account per layer, each one a new secret ask and failure
+mode. Cloudflare-only keeps one deploy target and one secret pair.
