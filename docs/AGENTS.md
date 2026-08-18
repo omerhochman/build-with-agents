@@ -87,9 +87,14 @@ it, review each PR in its own sub-agent so verdicts stay independent.
    wherever the change made them untrue; decisions documented at the right
    tier (CLAUDE.md § Memory rules).
 5. **Readability, consistency, reusability, scalability, developer
-   experience.**
-6. **Observability, non-spammy:** logs/metrics that answer a real question;
-   no noise.
+   experience.** Each external system (API, DB, service) has exactly one
+   canonical owning module — a second call site to the same system is a
+   finding. Exported functions take minimal required params with sensible
+   defaults; error messages say what to do next.
+6. **Observability, non-spammy:** logs tell a story, not the novel — one
+   structured line per decision point (what was attempted, why it failed,
+   the next action), successes silent, no per-iteration chatter, never a
+   secret or PII in a log line.
 7. **Comments judicious:** one-sentence why-comments only where the code
    can't say it (per the memory rules' bar); never narration.
 

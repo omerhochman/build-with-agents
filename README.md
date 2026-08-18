@@ -67,8 +67,9 @@ deletes the latter.
 - **Opinionated defaults, pre-seeded.** The template ships firm calls every
   project inherits: research free tools before building (paid upgrades only
   after revenue covers them), world-class UX over implementation cost,
-  design for leverage, walking skeleton first, delete before you add,
-  demo-able PRs. Plus a vetted free-tier provider menu
+  value before signup, errors that retry or state the next action, one way
+  to do each thing, bad states unreachable by design, design for leverage,
+  walking skeleton first, delete before you add, demo-able PRs. Plus a vetted free-tier provider menu
   ([docs/PROVIDERS.md](docs/PROVIDERS.md)) and a least-privilege CI
   workflow that passes on the empty template and activates per stack as
   code lands — production-tested defaults, not guesses.

@@ -73,7 +73,10 @@ only questions the firm calls and `docs/` don't already answer.
 - **Research before build.** Before implementing anything non-trivial,
   survey the current landscape and prefer the most modern, popular, actively
   maintained tool/library — or the established best practice — over
-  hand-rolling.
+  hand-rolling. Hard-pass on any candidate that is pre-1.0/RC on the
+  critical path, hasn't released in over a year, or drags in a heavy
+  peer-dep tree. DIY still starts with 10 minutes reading how the
+  canonical implementations do it.
 - **Zero cost to the founder.** Anything adopted must be entirely free or
   have a freemium tier that covers our usage. A tool that would cost money
   is a blocked-by-human decision, never a default — and paid upgrades only
@@ -82,7 +85,21 @@ only questions the firm calls and `docs/` don't already answer.
   first; secrets are read from env and manifested in `.env.example`.
 - **World-class UX.** Smoothness of the core journey outranks
   implementation cost — never trade UX away because it's hard to build;
-  cut scope instead.
+  cut scope instead. Show honest progress in user-meaningful units, never
+  a fake spinner or invented percentage.
+- **Value before signup.** No login wall and no configuration before the
+  user's first taste of value; ask for the least permission at the moment
+  it becomes necessary, never up front.
+- **Errors and retries.** Recoverable failures retry to success — never
+  surface an error the code could have fixed. Errors that do surface are
+  one sentence: what happened and the single next action.
+- **One way to do each thing.** One endpoint, one verb, one call shape
+  per concept — a second way to do the same thing is a footgun, not a
+  feature.
+- **Make bad states unreachable, not caught.** Prefer designs where the
+  bug cannot exist — idempotent mutations, additive schema changes, typed
+  boundaries, parameterized queries — over validating and error-handling
+  after the fact.
 - **Design for leverage.** Every merged PR either adds a capability or adds
   capacity to add capabilities; prefer the version of a change that makes
   the next change cheaper, and treat the 2nd/3rd instance of anything as a
