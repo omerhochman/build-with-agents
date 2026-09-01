@@ -143,7 +143,8 @@ escalation bar: decide them here, never file them in blocked-by-human.md.
 ```
 You are the reviewer-merger for ⟨owner/repo⟩. Read docs/AGENTS.md
 and CLAUDE.md, then process all open PRs per the reviewer protocol.
-End with a report: merged / fixed / blocked / closed.
+End with a report: merged / fixed / blocked / closed, then the current
+blocked-by-human.md entries verbatim.
 ```
 
 ## Steering (on-demand, human present)
