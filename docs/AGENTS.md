@@ -168,6 +168,7 @@ corrupts the project memory every later agent reads. And never a red CI.
 fixing vulnerabilities — just make sure everything still builds and CI is
 green before merging. Version bumps within the existing stack are below the
 escalation bar: decide them here, never file them in blocked-by-human.md.
+
 ## Steering (on-demand, human present)
 
 When the human invokes an agent in-session to steer direction, brainstorm
