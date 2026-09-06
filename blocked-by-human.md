@@ -16,23 +16,21 @@ Protocol in [CLAUDE.md](CLAUDE.md) § Human-blocked work.
      **Add branch ruleset** (or **Add rule** on the classic page).
   2. Branch name pattern — paste: `main`
   3. Check **Require a pull request before merging**; set required
-     approvals to `0` (the reviewer-merger agent is the approver; a
+     approvals to `0` (the scheduled run's reviewer mode is the approver; a
      required-review count would block its merges).
   4. Save.
 - **Answer:** _(human writes here)_
 
-## Schedule the worker and reviewer-merger agents
+## Schedule the agent run
 - **Type:** account action
-- **Done so far:** both protocols and their one-line cron prompts are written
-  in docs/AGENTS.md; nothing runs until you schedule them.
+- **Done so far:** the protocol and its one-line cron prompt are written in
+  docs/AGENTS.md; nothing runs until you schedule it.
 - **Ask:**
   1. Open your agent platform's scheduled/cron jobs page.
-  2. Create a **worker** job, a few times daily, fresh session with access
-     to this repo — paste its cron prompt verbatim from
-     [docs/AGENTS.md](docs/AGENTS.md) § Worker.
-  3. Create a **reviewer-merger** job, daily, fresh session with access to
-     this repo — paste its cron prompt verbatim from
-     [docs/AGENTS.md](docs/AGENTS.md) § Reviewer-merger.
+  2. Create **one** job, twice daily, fresh session with access to this repo
+     — paste the cron prompt verbatim from
+     [docs/AGENTS.md](docs/AGENTS.md) § Scheduled run. The run picks worker
+     or reviewer mode itself; a second job is not needed.
 - **Answer:** _(human writes here)_
 
 <!-- Entry template — copy below this line. Asks are numbered steps the

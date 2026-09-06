@@ -18,12 +18,12 @@ flow by flow: [docs/END_GOAL.md](docs/END_GOAL.md).
 2. Read [docs/END_GOAL.md](docs/END_GOAL.md) — the north star every item
    and PR is judged against; where the roadmap contradicts it, fix the
    roadmap. Then list open PRs — **an open PR is a claim on its roadmap
-   item**; skip claimed items. Take the first unchecked, unblocked,
-   unclaimed item in [docs/ROADMAP.md](docs/ROADMAP.md) (unless the user
-   names a different task).
+   item; a draft PR is parked, never a claim**; skip claimed items. Take the
+   first unchecked, unblocked, unclaimed item in
+   [docs/ROADMAP.md](docs/ROADMAP.md) (unless the user names a task).
 3. Do the work **on a fresh branch, and open a PR to `main`** titled with the
    roadmap item verbatim (that's what makes claims checkable). Never push to
-   `main` directly — a daily reviewer-merger agent reviews and merges.
+   `main` directly — the scheduled run's reviewer mode reviews and merges.
    If a step needs a human (secret, account action, pivotal decision): do
    everything up to that boundary — but never build past a decision fork —
    file the blocker (see below), mark the roadmap item
@@ -59,8 +59,8 @@ posture, dependency lock-in — and anything contradicting a firm call (hard
 stop, always). Genuinely unsure after checking the docs → escalate, with a
 recommendation.
 
-**Questions are for humans-in-session only.** Scheduled runs (worker,
-reviewer-merger) never ask questions mid-run — a blocker goes in the
+**Questions are for humans-in-session only.** Scheduled runs (either mode)
+never ask questions mid-run — a blocker goes in the
 mailbox and the run continues. Ask directly only when a human is present
 in the session (bootstrap, steering, roadmap brainstorming), and even then
 only questions the firm calls and `docs/` don't already answer.
@@ -174,7 +174,7 @@ and rebuildable — truth never moves into it.
 | [docs/PRODUCT.md](docs/PRODUCT.md) | Framing, positioning, MVP scope |
 | [docs/END_GOAL.md](docs/END_GOAL.md) | The finished product, flow by flow — north star for every item and PR |
 | [docs/ROADMAP.md](docs/ROADMAP.md) | Task queue — phased checkboxes |
-| [docs/AGENTS.md](docs/AGENTS.md) | Worker & reviewer-merger protocols, cron prompts |
+| [docs/AGENTS.md](docs/AGENTS.md) | Bootstrap + the scheduled run: dispatch, worker / reviewer-fixer-merger modes, cron prompt |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Stack, components, data model |
 | [docs/UX.md](docs/UX.md) | Core interaction spec |
 | [docs/PRIVACY.md](docs/PRIVACY.md) | Data lifecycle, guarantees |

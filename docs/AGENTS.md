@@ -1,9 +1,10 @@
 # Agent roles
 
-Two scheduled agents drive this repo. Their protocols live here — versioned
-with the code — so each cron prompt stays a one-liner pointing at this file.
-(A third, one-shot role — Bootstrap — turns the template into a project and
-then deletes itself from this file.)
+One scheduled agent drives this repo — a single cron, twice daily, that
+dispatches itself into worker or reviewer mode. Its protocol lives here —
+versioned with the code — so the cron prompt stays a one-liner pointing at
+this file. (A second, one-shot role — Bootstrap — turns the template into a
+project and then deletes itself from this file.)
 
 ## Bootstrap (one-shot — delete this section when done)
 
@@ -50,7 +51,7 @@ paragraph in the invoking prompt). Do it all **in one PR to `main`** titled
    now, status, roadmap at a glance, tech stack, principles, docs table. No
    trace of the template may remain.
 6. **Housekeeping in the same PR:** stamp `<owner>/<repo>` into the cron
-   prompts below **and into the links in
+   prompt below **and into the links in
    [blocked-by-human.md](../blocked-by-human.md)**, verify the two
    pre-seeded entries there still match reality, adapt
    `.github/workflows/ci.yml` to the chosen stack (replace the prechecks
@@ -61,20 +62,40 @@ paragraph in the invoking prompt). Do it all **in one PR to `main`** titled
 7. **End with a report:** PR link, the proposed firm calls, and what the
    human must do next (merge, then resolve blocked-by-human.md).
 
-## Worker (a few times daily)
+## Scheduled run (one cron, twice daily)
 
-Follows the task loop in [CLAUDE.md](../CLAUDE.md). No extra rules. Runs
-unattended — never asks questions; anything needing a human goes to
+Runs unattended — never asks questions; anything needing a human goes to
 [blocked-by-human.md](../blocked-by-human.md).
 
 **Cron prompt (fresh session per run) — copy verbatim, fill the repo:**
 
 ```
-Read CLAUDE.md in ⟨owner/repo⟩ and follow its task loop exactly.
-End with a short report: what shipped (PR link), what's blocked and on what.
+Scheduled run for ⟨owner/repo⟩: follow docs/AGENTS.md § Scheduled run. End with a 5-line report.
 ```
 
-## Reviewer-merger (daily)
+**Dispatch — first action of every run.** List open PRs on this repo.
+
+- **0 open non-draft PRs → Worker mode.** Follow the task loop in
+  [CLAUDE.md](../CLAUDE.md). Read [END_GOAL.md](END_GOAL.md) and only the
+  docs the item touches.
+- **≥ 1 open non-draft PR → Reviewer-fixer-merger mode** (below). Do not also
+  take a new item — one mode per run keeps each run's context to one job.
+
+**Draft = parked, not a claim.** Dispatch ignores drafts. Reviewer mode
+converts a PR to draft when it will not merge it this run and cannot fix it
+(firm-call violation, human-scale decision, fix larger than the PR, or
+blocked on an external step) — with ONE comment: why, and the exact condition
+that un-drafts it; a human-scale decision also gets its blocked-by-human.md
+entry. Worker mode, before taking a fresh roadmap item, adopts a draft whose
+un-draft condition is now met (merge `main` in, fix, mark ready for review) —
+that counts as its item. Nothing else touches drafts. Duplicate or superseded
+PRs are closed with a one-line comment, never drafted.
+
+**Report (5 lines), either mode:** mode taken, what shipped or merged / fixed
+/ drafted / closed, what is blocked and on what, then the current
+blocked-by-human.md entries verbatim.
+
+### Reviewer-fixer-merger mode
 
 The only path to `main` — and it **is authorized to merge**; that is the job.
 Process every open non-draft PR, oldest first. Where the platform supports
@@ -122,9 +143,9 @@ it, review each PR in its own sub-agent so verdicts stay independent.
    entry in [blocked-by-human.md](../blocked-by-human.md) — then
    squash-merge and delete the branch. Squash keeps `main` at one commit
    per roadmap item, so `git log` reads as the roadmap's history.
-6. **Firm-call violation or human-scale decision** → do NOT merge. Leave a
-   review comment; file an entry in blocked-by-human.md if the human must
-   decide.
+6. **Firm-call violation, human-scale decision, or a fix larger than the
+   PR** → do NOT merge: convert the PR to draft per the draft rule above,
+   and file the blocked-by-human.md entry if the human must decide.
 7. **Duplicate or superseded** → close with a one-line comment.
 
 Never merge a PR that leaves the roadmap, docs, or README untrue — that
@@ -147,15 +168,6 @@ corrupts the project memory every later agent reads. And never a red CI.
 fixing vulnerabilities — just make sure everything still builds and CI is
 green before merging. Version bumps within the existing stack are below the
 escalation bar: decide them here, never file them in blocked-by-human.md.
-
-**Cron prompt (fresh session per run) — copy verbatim, fill the repo:**
-
-```
-You are the reviewer-merger for ⟨owner/repo⟩. Read docs/AGENTS.md
-and CLAUDE.md, then process all open PRs per the reviewer protocol.
-End with a report: merged / fixed / blocked / closed, then the current
-blocked-by-human.md entries verbatim.
-```
 
 ## Steering (on-demand, human present)
 

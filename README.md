@@ -1,7 +1,7 @@
 # Build with agents
 
 A scaffolding template for **agent-driven side projects**: fork it, hand an
-agent your idea in one paragraph, and get a repo where scheduled agents ship
+agent your idea in one paragraph, and get a repo where a scheduled agent ships
 PRs against a roadmap while you only answer for secrets, account actions, and
 pivotal decisions.
 
@@ -39,7 +39,7 @@ pivotal decisions.
 | [docs/PRODUCT.md](docs/PRODUCT.md) | Framing, positioning, MVP scope |
 | [docs/END_GOAL.md](docs/END_GOAL.md) | The finished product, flow by flow — the north star every roadmap item and PR is judged against |
 | [docs/ROADMAP.md](docs/ROADMAP.md) | Task queue — phased checkboxes agents work through |
-| [docs/AGENTS.md](docs/AGENTS.md) | Bootstrap, worker & reviewer-merger protocols, cron prompts |
+| [docs/AGENTS.md](docs/AGENTS.md) | Bootstrap + the scheduled run: dispatch, worker / reviewer-fixer-merger modes, cron prompt |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Stack, components, data model |
 | [docs/UX.md](docs/UX.md) | The core interaction spec |
 | [docs/PRIVACY.md](docs/PRIVACY.md) | Data lifecycle and guarantees |
@@ -54,12 +54,14 @@ deletes the latter.
 
 ## The model
 
-- **Two scheduled agents, one repo.** A *worker* runs a few times daily: takes
-  the next unclaimed roadmap item, ships it as a PR. A *reviewer-merger* runs
-  daily: reviews, fixes small issues itself, squash-merges. Nothing reaches
+- **One scheduled agent, two modes.** A single cron runs twice daily and
+  dispatches itself: no open PR → *worker* mode takes the next unclaimed
+  roadmap item and ships it as a PR; an open PR → *reviewer-fixer-merger*
+  mode reviews, fixes small issues itself, squash-merges. Nothing reaches
   `main` without passing through it.
 - **An open PR is a claim on its roadmap item** — that's what lets concurrent
-  agent runs coexist without stepping on each other.
+  agent runs coexist without stepping on each other. A **draft PR is parked,
+  never a claim**: that's how the reviewer sets aside what it can't merge.
 - **Humans are an async dependency, not a supervisor.** When a task needs a
   secret, an account action, or a pivotal decision, the agent files a precise
   step-by-step ask (links + copy-paste values) in `blocked-by-human.md` and
