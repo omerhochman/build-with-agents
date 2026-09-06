@@ -23,7 +23,9 @@ pivotal decisions.
    questions — only about what your paragraph left open, each with a
    proposed default — then opens the bootstrap PR.
 4. **Review and merge the bootstrap PR.** Merging is how you sign off on the
-   framing, the stack, and the firm calls — read them like a contract.
+   framing, the end goal, the stack, and the firm calls — read them like a
+   contract, and [docs/END_GOAL.md](docs/END_GOAL.md) line by line: every
+   later PR is judged against it.
 5. **Resolve the entries in [blocked-by-human.md](blocked-by-human.md)**
    (branch protection, agent scheduling) — each is a sub-minute checklist
    with links and copy-paste values. From then on the loop runs itself.
@@ -35,6 +37,7 @@ pivotal decisions.
 | [CLAUDE.md](CLAUDE.md) | Agent instructions: task loop, escalation rules, project memory rules |
 | [blocked-by-human.md](blocked-by-human.md) | Async agent↔human mailbox — open blockers only |
 | [docs/PRODUCT.md](docs/PRODUCT.md) | Framing, positioning, MVP scope |
+| [docs/END_GOAL.md](docs/END_GOAL.md) | The finished product, flow by flow — the north star every roadmap item and PR is judged against |
 | [docs/ROADMAP.md](docs/ROADMAP.md) | Task queue — phased checkboxes agents work through |
 | [docs/AGENTS.md](docs/AGENTS.md) | Bootstrap, worker & reviewer-merger protocols, cron prompts |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Stack, components, data model |

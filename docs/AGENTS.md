@@ -24,7 +24,13 @@ paragraph in the invoking prompt). Do it all **in one PR to `main`** titled
    Every other doc derives from it. The key move: find the **wedge** — the
    cheapest version that proves the core interaction/value, and push
    everything that needs accounts, backends, or policy to a later phase.
-2. **Fill the remaining docs** ([ARCHITECTURE.md](ARCHITECTURE.md),
+2. **Write [END_GOAL.md](END_GOAL.md) second** — the finished product
+   through the user's eyes: personas, the happy path step by step, states,
+   non-goals — per its own "How to write this" rules (no adjectives, flows
+   not features). Every roadmap item derives from a flow step here, and
+   every later PR is judged against it; in the report, ask the human to
+   read this one line by line before merging.
+3. **Fill the remaining docs** ([ARCHITECTURE.md](ARCHITECTURE.md),
    [UX.md](UX.md), [PRIVACY.md](PRIVACY.md), [RISKS.md](RISKS.md),
    [ROADMAP.md](ROADMAP.md)): pick the stack's providers from
    [PROVIDERS.md](PROVIDERS.md) first (record picks and rejected
@@ -35,15 +41,15 @@ paragraph in the invoking prompt). Do it all **in one PR to `main`** titled
    idea gets **deleted, not stubbed** (a UX spec may become an API spec, a
    privacy doc may be one paragraph) — rename or drop docs to fit the idea
    and keep both docs indexes true.
-3. **Fill [CLAUDE.md](../CLAUDE.md):** the header block and the firm calls.
+4. **Fill [CLAUDE.md](../CLAUDE.md):** the header block and the firm calls.
    Propose firm calls decisively — scope, stack, posture, monetization —
    with one line of why each; merging the PR is the human's sign-off. Only
    file a blocked-by-human decision entry for a genuine coin-flip you cannot
    argue one way.
-4. **Replace the root README** with the product's README: one-liner, why
+5. **Replace the root README** with the product's README: one-liner, why
    now, status, roadmap at a glance, tech stack, principles, docs table. No
    trace of the template may remain.
-5. **Housekeeping in the same PR:** stamp `<owner>/<repo>` into the cron
+6. **Housekeeping in the same PR:** stamp `<owner>/<repo>` into the cron
    prompts below **and into the links in
    [blocked-by-human.md](../blocked-by-human.md)**, verify the two
    pre-seeded entries there still match reality, adapt
@@ -52,7 +58,7 @@ paragraph in the invoking prompt). Do it all **in one PR to `main`** titled
    properties per the file's header), and
    delete this Bootstrap section (memory stores current state — a
    bootstrapped project has no bootstrap protocol).
-6. **End with a report:** PR link, the proposed firm calls, and what the
+7. **End with a report:** PR link, the proposed firm calls, and what the
    human must do next (merge, then resolve blocked-by-human.md).
 
 ## Worker (a few times daily)
@@ -76,8 +82,12 @@ it, review each PR in its own sub-agent so verdicts stay independent.
 
 **Review criteria**, in priority order:
 
-1. **User experience above all:** minimum user actions for maximum value;
-   minimize user-regretted seconds — interruptions, spam, waiting, dead ends.
+1. **User experience above all**, measured against
+   [END_GOAL.md](END_GOAL.md): the PR moves a flow step toward its written
+   state and moves no other step away; minimum user actions for maximum
+   value; minimize user-regretted seconds — interruptions, spam, waiting,
+   dead ends. A roadmap item that contradicts END_GOAL.md is a roadmap bug
+   to fix, never a reason to bend the flow.
 2. **Security:** injection (SQL and otherwise), authz on every surface,
    secrets only ever read from env.
 3. **Correctness & robustness:** edge cases and failure paths, not just the

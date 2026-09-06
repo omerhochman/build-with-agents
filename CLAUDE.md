@@ -1,21 +1,26 @@
 # ⟨Project name⟩ — Agent Instructions
 
 <!-- template: 2–4 lines. The product one-liner, the core mechanic, and the
-     sequencing thesis (what ships first and why). End with a pointer to
-     docs/PRODUCT.md. If this file still contains ⟨placeholders⟩, the project
-     is not bootstrapped — stop and follow docs/AGENTS.md § Bootstrap. -->
+     sequencing thesis (what ships first and why). End with the pointers to
+     docs/PRODUCT.md and docs/END_GOAL.md. If this file still contains
+     ⟨placeholders⟩, the project is not bootstrapped — stop and follow
+     docs/AGENTS.md § Bootstrap. -->
 
 ⟨One-liner and core mechanic.⟩ ⟨Sequencing thesis: what ships first and what
-waits.⟩ Framing: [docs/PRODUCT.md](docs/PRODUCT.md).
+waits.⟩ Framing: [docs/PRODUCT.md](docs/PRODUCT.md). The finished product,
+flow by flow: [docs/END_GOAL.md](docs/END_GOAL.md).
 
 ## Task loop
 
 1. Check [blocked-by-human.md](blocked-by-human.md): finish any entry that is
    now answered or satisfiable (e.g. the env var exists), deleting the entry
    in the same commit.
-2. List open PRs — **an open PR is a claim on its roadmap item**; skip
-   claimed items. Take the first unchecked, unblocked, unclaimed item in
-   [docs/ROADMAP.md](docs/ROADMAP.md) (unless the user names a different task).
+2. Read [docs/END_GOAL.md](docs/END_GOAL.md) — the north star every item
+   and PR is judged against; where the roadmap contradicts it, fix the
+   roadmap. Then list open PRs — **an open PR is a claim on its roadmap
+   item**; skip claimed items. Take the first unchecked, unblocked,
+   unclaimed item in [docs/ROADMAP.md](docs/ROADMAP.md) (unless the user
+   names a different task).
 3. Do the work **on a fresh branch, and open a PR to `main`** titled with the
    roadmap item verbatim (that's what makes claims checkable). Never push to
    `main` directly — a daily reviewer-merger agent reviews and merges.
@@ -167,6 +172,7 @@ and rebuildable — truth never moves into it.
 | Doc | Contents |
 |-----|----------|
 | [docs/PRODUCT.md](docs/PRODUCT.md) | Framing, positioning, MVP scope |
+| [docs/END_GOAL.md](docs/END_GOAL.md) | The finished product, flow by flow — north star for every item and PR |
 | [docs/ROADMAP.md](docs/ROADMAP.md) | Task queue — phased checkboxes |
 | [docs/AGENTS.md](docs/AGENTS.md) | Worker & reviewer-merger protocols, cron prompts |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Stack, components, data model |
