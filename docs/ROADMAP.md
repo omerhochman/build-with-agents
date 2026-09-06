@@ -4,7 +4,9 @@
      unblocked, unclaimed box, so ordering IS prioritization. Write items as
      shippable, PR-sized units (a checked box = a merged PR), concrete enough
      to start without asking questions: name the library, the API, the
-     platform quirk in the item itself. Phases mirror PRODUCT.md § MVP scope.
+     platform quirk in the item itself. Phases mirror PRODUCT.md § MVP scope;
+     each item moves a named flow step in END_GOAL.md toward its written
+     state — an item no flow step needs is scope creep.
      Blocked items get suffixed `⛔ see blocked-by-human.md` by the worker. -->
 
 Effort estimates assume **one developer, focused weeks**. One checkbox =
