@@ -56,8 +56,8 @@ paragraph in the invoking prompt). Do it all **in one PR to `main`** titled
    pre-seeded entries there still match reality, adapt
    `.github/workflows/ci.yml` to the chosen stack (replace the prechecks
    the stack decision resolves; keep its least-privilege/self-skip
-   properties per the file's header), add the stack's ecosystems to
-   `.github/dependabot.yml`, and
+   properties per the file's header), set the stack's ecosystems in
+   `.github/dependabot.yml` (default `bun`; swap or add per its header), and
    delete this Bootstrap section (memory stores current state — a
    bootstrapped project has no bootstrap protocol).
 7. **End with a report:** PR link, the proposed firm calls, and what the

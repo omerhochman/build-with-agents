@@ -1,19 +1,23 @@
-# Template default — repos with other ecosystems (pip/uv, gomod, cargo, docker,
-# a nested package dir) add an entry per ecosystem. Weekly and grouped to bound
-# PR noise: minor+patch bumps arrive as one PR per ecosystem, which the
-# scheduled run's reviewer mode merges on green (docs/AGENTS.md § Bot PRs).
-# Majors are left out of the group on purpose: a major can change compiler or
-# bundler behavior, so it is a migration to adopt deliberately as its own PR —
-# and one red major must never block the whole group.
+# Template default — `bun` matches the stack call (bun.lock; CI installs with
+# `bun install --frozen-lockfile`, so the `npm` updater would bump package.json
+# and leave the lockfile stale → red bot PRs). Repos installing with
+# npm/pnpm/yarn switch the ecosystem to match their lockfile; repos with other
+# ecosystems (pip/uv, gomod, cargo, docker, a nested package dir) add an entry
+# per ecosystem. Weekly and grouped to bound PR noise: minor+patch bumps arrive
+# as one PR per ecosystem, which the scheduled run's reviewer mode merges on
+# green (docs/AGENTS.md § Bot PRs). Majors are left out of the group on
+# purpose: a major can change compiler or bundler behavior, so it is a
+# migration to adopt deliberately as its own PR — and one red major must never
+# block the whole group.
 version: 2
 updates:
-  - package-ecosystem: npm
+  - package-ecosystem: bun
     directory: /
     schedule:
       interval: weekly
     open-pull-requests-limit: 3
     groups:
-      npm-minor-patch:
+      bun-minor-patch:
         patterns: ["*"]
         update-types: ["minor", "patch"]
   - package-ecosystem: github-actions

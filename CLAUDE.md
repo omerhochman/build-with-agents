@@ -169,4 +169,4 @@ and rebuildable — truth never moves into it.
 | [docs/PROVIDERS.md](docs/PROVIDERS.md) | Vetted free-tier provider menu, gotchas, secret names |
 | [.github/workflows/ci.yml](.github/workflows/ci.yml) | Tier-0 backstop — self-skipping lint/typecheck/test per stack |
 | [.github/pull_request_template.md](.github/pull_request_template.md) | PR body: roadmap item, `Walked:` line, blockers filed |
-| [.github/dependabot.yml](.github/dependabot.yml) | Weekly grouped minor+patch bumps (npm, actions); majors separate |
+| [.github/dependabot.yml](.github/dependabot.yml) | Weekly grouped minor+patch bumps (bun, actions); majors separate |
