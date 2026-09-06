@@ -25,12 +25,12 @@ paragraph in the invoking prompt). Do it all **in one PR to `main`** titled
    Every other doc derives from it. The key move: find the **wedge** — the
    cheapest version that proves the core interaction/value, and push
    everything that needs accounts, backends, or policy to a later phase.
-2. **Write [END_GOAL.md](END_GOAL.md) second** — the finished product
-   through the user's eyes: personas, the happy path step by step, states,
-   non-goals — per its own "How to write this" rules (no adjectives, flows
-   not features). Every roadmap item derives from a flow step here, and
-   every later PR is judged against it; in the report, ask the human to
-   read this one line by line before merging.
+2. **Write [END_GOAL.md](END_GOAL.md) second** — the **finished product
+   across all phases** (never a v0 snapshot; no phase labels inside the
+   flows) through the user's eyes: personas, one happy-path table, states,
+   non-goals — per its own "How to write this" rules. Every roadmap item
+   derives from a flow step here, and every later PR is judged against it;
+   in the report, ask the human to read this one line by line before merging.
 3. **Fill the remaining docs** ([ARCHITECTURE.md](ARCHITECTURE.md),
    [UX.md](UX.md), [PRIVACY.md](PRIVACY.md), [RISKS.md](RISKS.md),
    [ROADMAP.md](ROADMAP.md)): pick the stack's providers from
