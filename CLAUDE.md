@@ -22,8 +22,8 @@ flow by flow: [docs/END_GOAL.md](docs/END_GOAL.md).
    first unchecked, unblocked, unclaimed item in
    [docs/ROADMAP.md](docs/ROADMAP.md) (unless the user names a task).
 3. Do the work **on a fresh branch, and open a PR to `main`** titled with the
-   roadmap item verbatim (that's what makes claims checkable). Never push to
-   `main` directly — the scheduled run's reviewer mode reviews and merges.
+   roadmap item verbatim, body per the PR template. Never push to `main`
+   directly — the scheduled run's reviewer mode reviews and merges.
    If a step needs a human (secret, account action, pivotal decision): do
    everything up to that boundary — but never build past a decision fork —
    file the blocker (see below), mark the roadmap item
@@ -42,8 +42,7 @@ Each entry: the roadmap item, what's already done, and the ask:
 - **Secrets / account actions:** numbered steps the human can execute in
   under a minute — a clickable link (full URL) for every page to open, and
   a copy-paste-ready block for every command, form field, or value — never
-  "configure X". Never ask for a secret in chat or a commit; code reads
-  from env from day one.
+  "configure X". Never ask for a secret in chat or a commit.
 - **Decisions:** a brief — options, one-line tradeoffs, and a recommendation.
   Never an open question that exports the analysis to the human. Often the
   cheapest ask is approval for a doc/firm-call amendment that unblocks the
@@ -72,8 +71,8 @@ only questions the firm calls and `docs/` don't already answer.
      reverse or that agents would otherwise reopen every run: scope cuts
      ("X waits for v1.1"), stack choices, privacy posture, monetization
      stance. One bold phrase + one line of why each. 5–10 entries; fold out
-     entries that go stale rather than letting the list grow. The two
-     pre-seeded calls below apply to every project — keep them. -->
+     entries that go stale rather than letting the list grow. The pre-seeded
+     calls below apply to every project — keep them. -->
 
 - **Research before build.** Before implementing anything non-trivial,
   survey the current landscape and prefer the most modern, popular, actively
@@ -95,27 +94,14 @@ only questions the firm calls and `docs/` don't already answer.
 - **Value before signup.** No login wall and no configuration before the
   user's first taste of value; ask for the least permission at the moment
   it becomes necessary, never up front.
-- **Errors and retries.** Recoverable failures retry to success — never
-  surface an error the code could have fixed. Errors that do surface are
-  one sentence: what happened and the single next action.
-- **One way to do each thing.** One endpoint, one verb, one call shape
-  per concept — a second way to do the same thing is a footgun, not a
-  feature.
-- **Make bad states unreachable, not caught.** Prefer designs where the
-  bug cannot exist — idempotent mutations, additive schema changes, typed
-  boundaries, parameterized queries — over validating and error-handling
-  after the fact.
-- **Design for leverage.** Every merged PR either adds a capability or adds
-  capacity to add capabilities; prefer the version of a change that makes
-  the next change cheaper, and treat the 2nd/3rd instance of anything as a
-  category to abstract.
+- **Engineering bar — binding.** [docs/GUIDELINES.md](docs/GUIDELINES.md):
+  one way per concept, bad states unreachable, leverage, delete-before-add,
+  retries — reviewed against, not re-litigated.
 - **Walking skeleton first.** Each phase starts with the thinnest
   end-to-end slice live at a real URL (or installable); everything after
   iterates on a live thing — never a big-bang integration.
-- **Delete before you add.** When fixing or extending, first look for code
-  or docs to remove or simplify; only then add.
 - **Demo-able PRs.** Every PR changes what a user can see or do, or adds
-  leverage — and its body states how to verify that in under a minute.
+  leverage — and its `Walked:` line (PR template) proves it in under a minute.
 - ⟨**Scope call.** What v0 is and is not, and what waits for later.⟩
 - ⟨**Stack call.** The chosen stack, and the rejected obvious alternative.⟩
 - ⟨**Product-posture call.** e.g. privacy stance, offline stance.⟩
@@ -148,9 +134,9 @@ manuals** — components, interfaces, invariants, and alternatives that
 you can leave behind). Edited in place; a doc may only say one thing at a
 time; docs scale with system complexity, never with project age. As code
 lands, detail migrates down to the narrowest scope with all its readers:
-line/function → why-comment at the site (bar: would a competent dev
-plausibly "fix" this into a bug? readable from the code → no comment);
-module → doc block atop the file; system → the relevant `docs/*.md`.
+line/function → why-comment at the site (bar: docs/GUIDELINES.md §
+Comments); module → doc block atop the file; system → the relevant
+`docs/*.md`.
 Shared reasoning: unify in code first (named constant / helper — one site
 again), else write it once at the lowest common ancestor with one-line
 pointers — **never paste the same explanation twice**; copies diverge
@@ -175,9 +161,12 @@ and rebuildable — truth never moves into it.
 | [docs/END_GOAL.md](docs/END_GOAL.md) | The finished product, flow by flow — north star for every item and PR |
 | [docs/ROADMAP.md](docs/ROADMAP.md) | Task queue — phased checkboxes |
 | [docs/AGENTS.md](docs/AGENTS.md) | Bootstrap + the scheduled run: dispatch, worker / reviewer-fixer-merger modes, cron prompt |
+| [docs/GUIDELINES.md](docs/GUIDELINES.md) | Engineering + testing bar — swept from the template; the `Walked:` rule |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Stack, components, data model |
 | [docs/UX.md](docs/UX.md) | Core interaction spec |
 | [docs/PRIVACY.md](docs/PRIVACY.md) | Data lifecycle, guarantees |
 | [docs/RISKS.md](docs/RISKS.md) | Monetization stance, key risks |
 | [docs/PROVIDERS.md](docs/PROVIDERS.md) | Vetted free-tier provider menu, gotchas, secret names |
 | [.github/workflows/ci.yml](.github/workflows/ci.yml) | Tier-0 backstop — self-skipping lint/typecheck/test per stack |
+| [.github/pull_request_template.md](.github/pull_request_template.md) | PR body: roadmap item, `Walked:` line, blockers filed |
+| [.github/dependabot.yml](.github/dependabot.yml) | Weekly grouped minor+patch bumps (npm, actions); majors separate |

@@ -56,7 +56,8 @@ paragraph in the invoking prompt). Do it all **in one PR to `main`** titled
    pre-seeded entries there still match reality, adapt
    `.github/workflows/ci.yml` to the chosen stack (replace the prechecks
    the stack decision resolves; keep its least-privilege/self-skip
-   properties per the file's header), and
+   properties per the file's header), add the stack's ecosystems to
+   `.github/dependabot.yml`, and
    delete this Bootstrap section (memory stores current state — a
    bootstrapped project has no bootstrap protocol).
 7. **End with a report:** PR link, the proposed firm calls, and what the
@@ -73,7 +74,9 @@ Runs unattended — never asks questions; anything needing a human goes to
 Scheduled run for ⟨owner/repo⟩: follow docs/AGENTS.md § Scheduled run. End with a 5-line report.
 ```
 
-**Dispatch — first action of every run.** List open PRs on this repo.
+**Dispatch — first action of every run.** List open PRs on this repo — bot
+PRs (Dependabot, `github-actions`) count like any other: they are cheap to
+process, and stale bumps accumulate risk.
 
 - **0 open non-draft PRs → Worker mode.** Follow the task loop in
   [CLAUDE.md](../CLAUDE.md). Read [END_GOAL.md](END_GOAL.md) and only the
@@ -114,20 +117,10 @@ it, review each PR in its own sub-agent so verdicts stay independent.
 3. **Correctness & robustness:** edge cases and failure paths, not just the
    happy path.
 4. **Firm calls & memory upkeep:** no firm-call violations; roadmap box
-   checked in the PR; docs — **including the root README** — edited in place
-   wherever the change made them untrue; decisions documented at the right
-   tier (CLAUDE.md § Memory rules).
-5. **Readability, consistency, reusability, scalability, developer
-   experience.** Each external system (API, DB, service) has exactly one
-   canonical owning module — a second call site to the same system is a
-   finding. Exported functions take minimal required params with sensible
-   defaults; error messages say what to do next.
-6. **Observability, non-spammy:** logs tell a story, not the novel — one
-   structured line per decision point (what was attempted, why it failed,
-   the next action), successes silent, no per-iteration chatter, never a
-   secret or PII in a log line.
-7. **Comments judicious:** one-sentence why-comments only where the code
-   can't say it (per the memory rules' bar); never narration.
+   checked in the PR; docs edited in place wherever the change made them
+   untrue; decisions documented at the right tier (CLAUDE.md § Memory rules).
+5. **Engineering bar:** every bullet of [GUIDELINES.md](GUIDELINES.md) is a
+   review criterion.
 
 **Per-PR loop:**
 
@@ -138,15 +131,18 @@ it, review each PR in its own sub-agent so verdicts stay independent.
 4. **If you pushed any fixes** → a fresh pass (fresh sub-agent where
    possible) re-reviews the whole PR rigorously. Repeat until a review
    finds zero fixable issues.
-5. **Clean review + green CI** → confirm nothing in the PR silently decided
-   a human-scale question (escalation bar in CLAUDE.md) — file any such
-   entry in [blocked-by-human.md](../blocked-by-human.md) — then
-   squash-merge and delete the branch. Squash keeps `main` at one commit
-   per roadmap item, so `git log` reads as the roadmap's history.
-6. **Firm-call violation, human-scale decision, or a fix larger than the
+5. **Re-run the PR's `Walked` line** in the stated environment; a `Walked`
+   that cannot be reproduced is a finding, fixed like any other.
+6. **Clean review + green CI + reproduced walk** → confirm nothing in the PR
+   silently decided a human-scale question (escalation bar in CLAUDE.md) —
+   file any such entry in [blocked-by-human.md](../blocked-by-human.md) —
+   then squash-merge and delete the branch. Squash keeps `main` at one
+   commit per roadmap item, so `git log` reads as the roadmap's history.
+7. **Firm-call violation, human-scale decision, or a fix larger than the
    PR** → do NOT merge: convert the PR to draft per the draft rule above,
    and file the blocked-by-human.md entry if the human must decide.
-7. **Duplicate or superseded** → close with a one-line comment.
+8. **Duplicate, superseded, or un-mergeable** → close with a one-line
+   comment saying why.
 
 Never merge a PR that leaves the roadmap, docs, or README untrue — that
 corrupts the project memory every later agent reads. And never a red CI.
@@ -163,10 +159,12 @@ corrupts the project memory every later agent reads. And never a red CI.
   enforces, docs restating what the code says, entries that stopped earning
   their place.
 
-**Bot PRs are in scope:** also pick up PRs from automation accounts
-(`github-actions`, Dependabot and the like) bumping package versions or
-fixing vulnerabilities — just make sure everything still builds and CI is
-green before merging. Version bumps within the existing stack are below the
+**Bot PRs:** dependency bumps from automation accounts (Dependabot,
+`github-actions`) merge on green CI, no human sign-off. No CI for the target
+(e.g. a native app)? Reproduce install, typecheck, tests, and a bundle
+locally and treat that as green. A bump that cannot install or build and
+whose fix is an out-of-scope upgrade (e.g. a package the platform SDK pins)
+→ close per step 8. Version bumps within the existing stack are below the
 escalation bar: decide them here, never file them in blocked-by-human.md.
 
 ## Steering (on-demand, human present)
