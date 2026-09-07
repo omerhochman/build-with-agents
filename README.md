@@ -40,12 +40,15 @@ pivotal decisions.
 | [docs/END_GOAL.md](docs/END_GOAL.md) | The finished product, flow by flow — the north star every roadmap item and PR is judged against |
 | [docs/ROADMAP.md](docs/ROADMAP.md) | Task queue — phased checkboxes agents work through |
 | [docs/AGENTS.md](docs/AGENTS.md) | Bootstrap + the scheduled run: dispatch, worker / reviewer-fixer-merger modes, cron prompt |
+| [docs/GUIDELINES.md](docs/GUIDELINES.md) | Engineering + testing bar every PR is built to and reviewed against; the `Walked:` verification rule |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Stack, components, data model |
 | [docs/UX.md](docs/UX.md) | The core interaction spec |
 | [docs/PRIVACY.md](docs/PRIVACY.md) | Data lifecycle and guarantees |
 | [docs/RISKS.md](docs/RISKS.md) | Monetization stance, key risks |
 | [docs/PROVIDERS.md](docs/PROVIDERS.md) | Vetted free-tier provider menu with gotchas and secret names |
 | [.github/workflows/ci.yml](.github/workflows/ci.yml) | CI that's green from the first fork and turns itself on per stack |
+| [.github/pull_request_template.md](.github/pull_request_template.md) | Three-line PR body: roadmap item, `Walked:` line, blockers filed |
+| [.github/dependabot.yml](.github/dependabot.yml) | Weekly grouped dependency bumps the reviewer mode merges on green |
 | [.env.example](.env.example) | Manifest of every secret the code reads |
 
 Template docs contain `⟨angle-bracket placeholders⟩` and
@@ -72,12 +75,15 @@ deletes the latter.
 - **Opinionated defaults, pre-seeded.** The template ships firm calls every
   project inherits: research free tools before building (paid upgrades only
   after revenue covers them), world-class UX over implementation cost,
-  value before signup, errors that retry or state the next action, one way
-  to do each thing, bad states unreachable by design, design for leverage,
-  walking skeleton first, delete before you add, demo-able PRs. Plus a vetted free-tier provider menu
-  ([docs/PROVIDERS.md](docs/PROVIDERS.md)) and a least-privilege CI
-  workflow that passes on the empty template and activates per stack as
-  code lands — production-tested defaults, not guesses.
+  value before signup, walking skeleton first, demo-able PRs — and a binding
+  engineering bar ([docs/GUIDELINES.md](docs/GUIDELINES.md): one way per
+  concept, bad states unreachable, leverage, delete before you add, retries)
+  that every PR is reviewed against, with a `Walked:` line the reviewer
+  re-runs before merging. Plus a vetted free-tier provider menu
+  ([docs/PROVIDERS.md](docs/PROVIDERS.md)), a least-privilege CI workflow
+  that passes on the empty template and activates per stack as code lands,
+  and grouped weekly dependency bumps — production-tested defaults, not
+  guesses.
 - **The repo is the only memory — five tiers, one per kind of knowledge.**
   Enforcement (lint/CI/hooks — conventions compile to machinery and the
   prose is deleted), a tiny always-loaded root file that indexes everything,
