@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - id: precheck
         run: |
           if [ -f package.json ]; then echo "exists=true" >> "$GITHUB_OUTPUT"
@@ -61,7 +61,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - id: precheck
         run: |
           if [ -f pyproject.toml ]; then echo "exists=true" >> "$GITHUB_OUTPUT"
@@ -82,7 +82,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - id: precheck
         run: |
           if [ -f go.mod ]; then echo "exists=true" >> "$GITHUB_OUTPUT"
@@ -103,7 +103,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: |
           if compgen -G "scripts/*.sh" > /dev/null; then
             sudo apt-get update -qq && sudo apt-get install -y shellcheck
