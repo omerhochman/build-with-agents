@@ -67,7 +67,7 @@ jobs:
           if [ -f pyproject.toml ]; then echo "exists=true" >> "$GITHUB_OUTPUT"
           else echo "exists=false" >> "$GITHUB_OUTPUT"; echo "::notice::no pyproject.toml — Python stack hasn't landed, skipping."; fi
       - if: steps.precheck.outputs.exists == 'true'
-        uses: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
       - if: steps.precheck.outputs.exists == 'true'
