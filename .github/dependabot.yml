@@ -9,17 +9,11 @@
 # purpose: a major can change compiler or bundler behavior, so it is a
 # migration to adopt deliberately as its own PR — and one red major must never
 # block the whole group.
+# This template repo itself has no JS lockfile, so the `bun` entry is omitted
+# here (the updater fails weekly with "/package.json not found" otherwise);
+# adopting repos with a lockfile re-add it per the guidance above.
 version: 2
 updates:
-  - package-ecosystem: bun
-    directory: /
-    schedule:
-      interval: weekly
-    open-pull-requests-limit: 3
-    groups:
-      bun-minor-patch:
-        patterns: ["*"]
-        update-types: ["minor", "patch"]
   - package-ecosystem: github-actions
     directory: /
     schedule:
