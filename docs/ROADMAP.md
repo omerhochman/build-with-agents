@@ -7,7 +7,14 @@
      platform quirk in the item itself. Phases mirror PRODUCT.md § MVP scope;
      each item moves a named flow step in END_GOAL.md toward its written
      state — an item no flow step needs is scope creep.
-     Blocked items get suffixed `⛔ see blocked-by-human.md` by the worker. -->
+     Blocked items get suffixed `⛔ see blocked-by-human.md` by the worker.
+
+     The first items after plumbing are the USER-VISIBLE core interaction in
+     its real shape (PRODUCT.md / END_GOAL.md / UX.md). Backend-only items
+     (ingest, p95, keep-warm, extra factors, infra adoption) do not sit in
+     front of that surface unless they unblock a number that surface shows.
+     "Data before beauty" is omit-missing-factors, not "list of internals
+     until every source is live". -->
 
 Effort estimates assume **one developer, focused weeks**. One checkbox =
 one merged PR. The queue living **in git** is the design; the checkbox
@@ -20,8 +27,10 @@ tracker.
 ⟨One line: what this phase proves.⟩
 
 - [ ] ⟨first item — often permissions/inputs plumbing⟩
-- [ ] ⟨core interaction, end to end⟩
-- [ ] ⟨supporting states: errors, empty, edge⟩
+- [ ] ⟨core interaction, end to end, in its REAL SHAPE — if the product is
+      a map, this is the map, not a list; if it is a camera, this is the
+      camera, not a settings page⟩
+- [ ] ⟨supporting states: errors, empty, edge — on that same surface⟩
 - [ ] ⟨the shareable/viral surface⟩
 - [ ] ⟨deploy: live at a URL / installable⟩
 

@@ -41,10 +41,12 @@ once.⟩**
 ### v0 — ⟨wedge, in five words⟩
 
 ⟨What it is, the target ship time, and why this is the cheapest true test
-of the core interaction.⟩
+of the core interaction. Name the home surface in the human's words (the
+map, the camera, the inbox) — do not invent a card stack and demote the
+interesting surface to v1.1.⟩
 
 **In:**
-- ⟨minimum feature list⟩
+- ⟨minimum feature list — the interesting surface is In, not Out⟩
 
 **Out:** everything else.
 

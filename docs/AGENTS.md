@@ -25,12 +25,16 @@ paragraph in the invoking prompt). Do it all **in one PR to `main`** titled
    Every other doc derives from it. The key move: find the **wedge** — the
    cheapest version that proves the core interaction/value, and push
    everything that needs accounts, backends, or policy to a later phase.
+   The wedge is the interaction **in the human's words**. If they named a
+   map, v0 In is the map. Do not invent a "Now screen" / "hero card" and
+   put the named surface in v1.1 Out.
 2. **Write [END_GOAL.md](END_GOAL.md) second** — the **finished product
    across all phases** (never a v0 snapshot; no phase labels inside the
    flows) through the user's eyes: personas, one happy-path table, states,
    non-goals — per its own "How to write this" rules. Every roadmap item
    derives from a flow step here, and every later PR is judged against it;
    in the report, ask the human to read this one line by line before merging.
+   Row 1 of the happy path **is** the named home surface.
 3. **Fill the remaining docs** ([ARCHITECTURE.md](ARCHITECTURE.md),
    [UX.md](UX.md), [PRIVACY.md](PRIVACY.md), [RISKS.md](RISKS.md),
    [ROADMAP.md](ROADMAP.md)): pick the stack's providers from
@@ -41,7 +45,8 @@ paragraph in the invoking prompt). Do it all **in one PR to `main`** titled
    `<!-- template: … -->` comment. A doc with nothing true to say for this
    idea gets **deleted, not stubbed** (a UX spec may become an API spec, a
    privacy doc may be one paragraph) — rename or drop docs to fit the idea
-   and keep both docs indexes true.
+   and keep both docs indexes true. The first ROADMAP items after plumbing
+   are that named surface, not a data-depth catalog.
 4. **Fill [CLAUDE.md](../CLAUDE.md):** the header block and the firm calls.
    Propose firm calls decisively — scope, stack, posture, monetization —
    with one line of why each; merging the PR is the human's sign-off. Only
@@ -111,7 +116,9 @@ it, review each PR in its own sub-agent so verdicts stay independent.
    state and moves no other step away; minimum user actions for maximum
    value; minimize user-regretted seconds — interruptions, spam, waiting,
    dead ends. A roadmap item that contradicts END_GOAL.md is a roadmap bug
-   to fix, never a reason to bend the flow.
+   to fix, never a reason to bend the flow. A PR that ships or preserves a
+   debug list / dump of internals as the home surface, when END_GOAL names
+   a different home, is a finding — not "the roadmap asked for a list".
 2. **Security:** injection (SQL and otherwise), authz on every surface,
    secrets only ever read from env.
 3. **Correctness & robustness:** edge cases and failure paths, not just the
