@@ -12,7 +12,11 @@
      flashier alternative you rejected and why (permissions, battery,
      jank). Stating the rejection here stops agents from "adding it back". -->
 
-⟨The default experience, and the rejected flashier alternative with why.⟩
+⟨The default experience — the home surface in the human's words, not an
+agent synonym. If they said "a map I drag with large tooltips", that is
+home; a "hero card" / "Now screen" is not a translation, it is a different
+product. State the rejected flashier alternative and why (permissions,
+battery, jank, overwhelming).⟩
 
 ## ⟨Primary state / mode⟩
 

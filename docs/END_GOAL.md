@@ -25,6 +25,18 @@ Write the app **as if every planned phase had already shipped**, watching one
 person use it. A line passes if an agent can build to it without asking and a
 reviewer can tell from the running app whether it is true.
 
+- **Home = the interesting product, in the human's words.** If they said
+  "a map I drag with large tooltips and only interesting information",
+  row 1 is that map — not a card stack you invented, with the named
+  surface demoted to "one gesture deep / v1.1 / never the answer".
+- **Jargon is a bug.** Do not introduce "hero", "Now screen", or other
+  agent synonyms for a surface the human did not name. If a word needs a
+  glossary, it does not belong in this doc.
+- **Sparse.** A dump of every seed, source id, score, or confidence % is
+  the dashboard they did not ask for. Pins / rows / cells earn a place
+  only if they can change a decision. Absent, not greyed.
+- **Honest.** Missing factors are omitted, never faked, never a colour
+  from absent data, never a reason to delay the surface.
 - **The end state, not v0.** A feature any phase in PRODUCT.md/ROADMAP.md
   plans belongs here as a flow row or a state; one the docs never plan does
   not — never invent. **No phase labels inside the flows** ("in v0", "later",

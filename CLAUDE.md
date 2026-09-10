@@ -88,11 +88,21 @@ brainstorming); a scheduled run never asks mid-run.
 - **Engineering bar — binding.** [docs/GUIDELINES.md](docs/GUIDELINES.md):
   one way per concept, bad states unreachable, leverage, delete-before-add,
   retries — reviewed against, not re-litigated.
-- **Walking skeleton first.** Each phase starts with the thinnest
-  end-to-end slice live at a real URL (or installable); everything after
-  iterates on a live thing.
+- **Walking skeleton first — in the real shape.** Each phase starts with
+  the thinnest end-to-end slice live at a real URL (or installable);
+  everything after iterates on a live thing. The skeleton is the **core
+  interaction as the human named it** (a map you drag, a camera you point)
+  — ugly is fine, **the wrong shape is not**. A debug list of pipeline
+  internals is not a walking skeleton of a map product. "Honest numbers
+  before a pretty lie" means omit missing factors, not postpone the
+  surface.
+- **User-visible core first.** While the core surface is a dump, the next
+  roadmap item is that surface. Backend-only, infra, keep-warm, p95, and
+  "data depth" items that do not change a number on that surface wait.
 - **Demo-able PRs.** Every PR changes what a user can see or do, or adds
-  leverage — and its `Walked:` line (PR template) proves it in under a minute.
+  leverage — and its `Walked:` line (PR template) proves it in under a
+  minute. A PR only an agent can appreciate cannot occupy the front of
+  the queue while the human still opens a dump.
 - ⟨**Scope call.** What v0 is and is not, and what waits for later.⟩
 - ⟨**Stack call.** The chosen stack, and the rejected obvious alternative.⟩
 - ⟨**Product-posture call.** e.g. privacy stance, offline stance.⟩

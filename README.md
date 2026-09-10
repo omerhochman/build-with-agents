@@ -43,6 +43,7 @@ pivotal decisions.
 | [docs/GUIDELINES.md](docs/GUIDELINES.md) | Engineering + testing bar every PR is built to and reviewed against; the `Walked:` verification rule |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Stack, components, data model |
 | [docs/UX.md](docs/UX.md) | The core interaction spec |
+| [docs/END_GOAL.md](docs/END_GOAL.md) | Finished product, flow by flow — home in the human's words |
 | [docs/PRIVACY.md](docs/PRIVACY.md) | Data lifecycle and guarantees |
 | [docs/RISKS.md](docs/RISKS.md) | Monetization stance, key risks |
 | [docs/PROVIDERS.md](docs/PROVIDERS.md) | Vetted free-tier provider menu with gotchas and secret names |
@@ -75,11 +76,13 @@ deletes the latter.
 - **Opinionated defaults, pre-seeded.** The template ships firm calls every
   project inherits: research free tools before building (paid upgrades only
   after revenue covers them), world-class UX over implementation cost,
-  value before signup, walking skeleton first, demo-able PRs — and a binding
-  engineering bar ([docs/GUIDELINES.md](docs/GUIDELINES.md): one way per
-  concept, bad states unreachable, leverage, delete before you add, retries)
-  that every PR is reviewed against, with a `Walked:` line the reviewer
-  re-runs before merging. Plus a vetted free-tier provider menu
+  value before signup, walking skeleton first (in the real shape of the
+  core interaction — a debug list is not a skeleton of a map), user-visible
+  core first, demo-able PRs — and a binding engineering bar
+  ([docs/GUIDELINES.md](docs/GUIDELINES.md): one way per concept, bad
+  states unreachable, leverage, delete before you add, retries) that every
+  PR is reviewed against, with a `Walked:` line the reviewer re-runs before
+  merging. Plus a vetted free-tier provider menu
   ([docs/PROVIDERS.md](docs/PROVIDERS.md)), a least-privilege CI workflow
   that passes on the empty template and activates per stack as code lands,
   and grouped weekly dependency bumps — production-tested defaults, not
